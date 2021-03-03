@@ -1,0 +1,35 @@
+<!-- # this is the home page for the ecommerce app -->
+<!-- try implementing a loop used in blog app of portfolio-project -->
+{% extends 'store/main.html' %} {% load static %} {% block content %}
+<h2><u>Latest Uploads</u></h2>
+<br />
+<div class="row">
+  <!-- creating loop to render in the home page -->
+  {% for product in products.all %}
+  <div class="col-lg-4">
+    <img
+      class="thumbnail"
+      height="300"
+      width="100"
+      src="{{ product.imageUrl }}"
+    />
+    <div class="box-element product">
+      <h6><strong>{{ product.name }}</strong></h6>
+      <hr />
+      <!-- class update cart is added so that event handler can be implemented along with product id and action -->
+      <button
+        data-product="{{ product.id }}"
+        data-action="add"
+        class="btn btn-outline-secondary add-btn update-cart"
+      >
+        Add to Cart
+      </button>
+      <a class="btn btn-outline-success" href="#">View</a>
+      <h4 style="display: inline-block; float: right">
+        <strong>${{ product.price|floatformat:2 }}</strong>
+      </h4>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
